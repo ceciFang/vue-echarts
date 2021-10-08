@@ -4,8 +4,8 @@
  * Michael Wang
  */
 
-import _object from 'lodash/object'
-import colors from 'vuetify/es5/util/colors'
+import _object from 'lodash/object';
+import colors from 'vuetify/es5/util/colors';
 const colorPalette = []
 Object.entries(colors).forEach((item) => {
   if (item[1].base) {
@@ -179,15 +179,16 @@ export default {
 
   },
   created () {
+    // 初始化echarts实例，设置配置项
     const ECharts = window.echarts || undefined
-    console.log(ECharts, '===12')
     if (ECharts === undefined) {
-      console.error('12233333')
       console.error('ECharts is not defined')
     }
   },
   methods: {
     getDefaultOption () {
+      console.log('====getDefaultOption')
+      console.log(this.$data._defaultOption, 'this.$data._defaultOption')
       return JSON.parse(JSON.stringify(this.$data._defaultOption))
     },
     init () {
@@ -199,6 +200,7 @@ export default {
           _object.set(this.instanceOption, p[0], p[1])
         })
       }
+      console.log('init')
       this.chartInstance = window.echarts.init(this.$refs.canvas, 'material')
       this.chartInstance.setOption(_object.merge(this.option, this.instanceOption))
       window.addEventListener('optimizedResize', () => {
